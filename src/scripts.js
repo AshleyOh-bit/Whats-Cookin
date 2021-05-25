@@ -4,7 +4,6 @@ import apiCalls from './apiCalls';
 
 // Import classes
 import  Recipe  from "./classes/Recipe";
-import  Ingredient  from './classes/Ingredient';
 import  RecipeRepository  from './classes/RecipeRepository';
 import  ApiHost  from './apiCalls';
 import  recipeData  from './data/recipes.js';
@@ -26,10 +25,7 @@ let recipeRepo = new RecipeRepository(instantiatedRecipes, ingredientsData);
 // DOM !!!
 // Buttons
 const allRecipesButton = document.getElementById("allRecipesButton");
-const favoriteButton = document.getElementById("favoriteButton");
-const toCookButton = document.getElementById("toCookButton");
-const addToFavoriteButton = document.getElementById("addToFavoriteButton");
-const addtoCookButton = document.getElementById("addtoCookButton");
+
 // Submit Buttons
 const homeViewBtn = document.getElementById("homeViewBtn");
 const filterNameIngInput = document.getElementById("filterNameIngInput");
@@ -37,12 +33,10 @@ const submitNameIng = document.getElementById("submitNameIng");
 const submitTagsButton = document.getElementById("submitTagsButton");
 const checkBoxes = document.querySelectorAll("input[type=checkbox]");
 // Views
-const tagsView = document.getElementById("tagsView");
 const recipeDisplay = document.getElementById("recipeDisplay");
 const favRecipesView = document.getElementById("favRecipesView");
 const toCookRecipesView = document.getElementById("toCookRecipesView");
 const currentRecipeView = document.getElementById("currentRecipeView");
-const currentRecipeCard = document.getElementById("currentRecipeCard");
 
 // Event Listeners
 allRecipesButton.addEventListener('click', showAllRecipes);
@@ -51,10 +45,12 @@ submitTagsButton.addEventListener('click', searchByTags);
 homeViewBtn.addEventListener('click', showHomeView);
 
 window.addEventListener("load", function() {
-  instantiateRecipes(recipeData)});
+  instantiateRecipes(recipeData)
+});
 
 window.addEventListener("load", function() {
-    showHomeView()});
+  showHomeView()
+});
 
 // Functions
 function preventDefault() {
@@ -90,7 +86,7 @@ function showRecipes(recipes) {
   if (recipes === "Sorry, we could not find any recipes to match your search") {
     return recipeDisplay.innerHTML = `<h3>Sorry, we could not find any recipes to match your search</h3>`;
   } else {
-    let recipeCard = recipes.forEach(recipe => {
+    recipes.forEach(recipe => {
       let recipeCard = document.createElement("div");
       recipeCard.addEventListener("click", showCurrentRecipe)
       recipeCard.innerHTML =
@@ -135,7 +131,7 @@ function searchByTags() {
   let checkBoxMatches = [];
   console.log(checkBoxMatches)
   checkBoxes.forEach(checkBox => {
-    if(checkBox.checked) {
+    if (checkBox.checked) {
       checkBoxMatches.push(checkBox.value)
     }
   })
@@ -146,9 +142,9 @@ function searchByTags() {
 }
 
 function displayCurrentRecipe(currentRecipe) {
-    currentRecipeView.innerHTML = "";
+  currentRecipeView.innerHTML = "";
 
-      currentRecipeView.innerHTML =
+  currentRecipeView.innerHTML =
           `<div class="current-recipe-card" id="currentRecipeCard">
           <section class="current-recipe-name">
             <h2>${currentRecipe.name}</h2>
@@ -185,7 +181,7 @@ function displayCurrentRecipe(currentRecipe) {
             </div>
           </section>
         </div>`
-};
+}
 
 function instantiateRecipes(recipeData) {
   recipeData.map(recipe => {
