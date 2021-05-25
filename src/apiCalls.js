@@ -22,6 +22,5 @@ class ApiHost {
   .catch(err => console.log('error'));
   }
 }
-console.log('I will be a fetch request!')
 
 export default ApiHost;

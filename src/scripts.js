@@ -16,17 +16,11 @@ let apiCall =  new ApiHost();
 const apiIng = apiCall.getIngredients();
 const apiRecipes = apiCall.getRecipes();
 const apiUsers = apiCall.getUsers();
+console.log(apiCall)
 console.log(apiIng);
 console.log(apiRecipes);
 console.log(apiUsers);
 
-// console.log(apiCall.getIngredients());
-// apiCall.getRecipes();
-//We will be instantiating Recipes here from data
-//event listener on window load for this function?
-
-
-//let recipeRepo = new RecipeRepository(recipeData);
 let recipeRepo = new RecipeRepository(instantiatedRecipes, ingredientsData);
 
 // DOM !!!
@@ -55,18 +49,12 @@ allRecipesButton.addEventListener('click', showAllRecipes);
 submitNameIng.addEventListener('click', searchByNameIng);
 submitTagsButton.addEventListener('click', searchByTags);
 homeViewBtn.addEventListener('click', showHomeView);
-// recipeDisplay.addEventListener("click", showCurrentRecipe);
 
 window.addEventListener("load", function() {
   instantiateRecipes(recipeData)});
 
 window.addEventListener("load", function() {
     showHomeView()});
-// favoriteButton.addEventListener('click', showFavoriteRecipes);
-// addToFavoriteButton.addEventListener('click', );
-// toCookButton.addEventListener('click', showRecipesToCook);
-// addtoCookButton.addEventListener('click', );
-
 
 // Functions
 function preventDefault() {
@@ -93,13 +81,10 @@ function showHomeView() {
   preventDefault();
 
   let randomRecipe = getRandomRecipe(recipeRepo.recipes);
-  //console.log(randomRecipe)
   showRecipes([randomRecipe]);
 }
 
 // Show Recipes Function
-// Change for iteration methods and be able to use for fav and to cook
-//
 function showRecipes(recipes) {
   recipeDisplay.innerHTML = "";
   if (recipes === "Sorry, we could not find any recipes to match your search") {
@@ -200,15 +185,12 @@ function displayCurrentRecipe(currentRecipe) {
             </div>
           </section>
         </div>`
-    // currentRecipeView.innerHTML = currentRecipeHTML;
-    //currentRecipeView.appendChild(currentRecipeView)
 };
 
 function instantiateRecipes(recipeData) {
   recipeData.map(recipe => {
     recipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags)
     recipe.createFullIngredients(ingredientsData)
-    //console.log(recipe)
     return instantiatedRecipes.push(recipe)
   })
 }
@@ -223,32 +205,10 @@ function showCurrentRecipe(event) {
 
   let target = event.target.id;
   recipeRepo.recipes.find(recipe => {
-    // console.log(recipes.id);
-    // console.log(target)
     let numId = recipe.id;
     let stringNum =  numId.toString();
-    // let parseNum = num.toString(recipes.id);
     let test1 = (stringNum === target);
-    // console.log(test1);
     displayCurrentRecipe(recipe);
     return test1
   });
 }
-
-// function showFavoriteRecipes() {
-//   show(favRecipesView);
-//   hide(toCookRecipesView);
-// }
-//
-// function showRecipesToCook() {
-//   show(toCookRecipesView);
-//   hide(favRecipesView);
-// }
-
-
-
-
-// window.onload = showRecipes(recipeRepo.recipes);
-//recipe.createFullIngredients()
-
-//console.log('Hello world');
