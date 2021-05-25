@@ -93,7 +93,7 @@ function showHomeView() {
   preventDefault();
 
   let randomRecipe = getRandomRecipe(recipeRepo.recipes);
-  console.log(randomRecipe)
+  //console.log(randomRecipe)
   showRecipes([randomRecipe]);
 }
 
@@ -102,46 +102,20 @@ function showHomeView() {
 //
 function showRecipes(recipes) {
   recipeDisplay.innerHTML = "";
-  let recipeCard = recipes.forEach(recipe => {
-    let recipeCard = document.createElement("div");
-    recipeCard.addEventListener("click", showCurrentRecipe)
-    recipeCard.innerHTML =
-    `
-    <h3 id=${recipe.id}>${recipe.name}</h3>
-    <img id=${recipe.id} src=${recipe.image}>
-    `
-    recipeDisplay.appendChild(recipeCard)
-  });
-
-
-  // recipeDisplay.innerHTML = "";
-  // for (var i = 0; i < recipes.length; i++) {
-  //   //recipes[i];
-  //   // console.log(recipes[i]);
-  //   let recipeCard = document.createElement("div");
-  //   recipeCard.addEventListener("click", showCurrentRecipe)
-  //   recipeCard.innerHTML =
-  //   `
-  //   <h3 id=${recipes[i].id}>${recipes[i].name}</h3>
-  //   <img id=${recipes[i].id} src=${recipes[i].image}>
-  //   `
-  //   recipeDisplay.appendChild(recipeCard)
-  // }
-
-
-  // recipeCardSection.innerHTML = "";
-  // let recipeCard = recipes.forEach(recipe => {
-  //   recipeCardSection.innerHTML +=
-  //   `
-  //   <div class="recipe-display" id="recipeDisplay">
-  //   <p id=${recipe.id}>${recipe.name}</p>
-  //   <img id=${recipe.id} src=${recipe.image}>
-  //   </div>
-  //   `
-  // })
-  // <div class="recipe-card-section" id="recipeCardSection">
-    // recipeDisplay.appendChild(recipeCardSection)
-
+  if (recipes === "Sorry, we could not find any recipes to match your search") {
+    return recipeDisplay.innerHTML = `<h3>Sorry, we could not find any recipes to match your search</h3>`;
+  } else {
+    let recipeCard = recipes.forEach(recipe => {
+      let recipeCard = document.createElement("div");
+      recipeCard.addEventListener("click", showCurrentRecipe)
+      recipeCard.innerHTML =
+      `
+      <h3 id=${recipe.id}>${recipe.name}</h3>
+      <img id=${recipe.id} src=${recipe.image}>
+      `
+      recipeDisplay.appendChild(recipeCard)
+    })
+  }
 }
 
 function showAllRecipes() {
@@ -161,6 +135,7 @@ function searchByNameIng() {
   preventDefault();
   show(recipeDisplay);
   const test2 = recipeRepo.filterRecipesByName(filterNameIngInput.value);
+  console.log(test2)
   showRecipes(test2);
 }
 
@@ -247,15 +222,15 @@ function showCurrentRecipe(event) {
   preventDefault();
 
   let target = event.target.id;
-  recipeRepo.recipes.find(recipes => {
+  recipeRepo.recipes.find(recipe => {
     // console.log(recipes.id);
     // console.log(target)
-    let numId = recipes.id;
+    let numId = recipe.id;
     let stringNum =  numId.toString();
     // let parseNum = num.toString(recipes.id);
     let test1 = (stringNum === target);
     // console.log(test1);
-    displayCurrentRecipe(recipes);
+    displayCurrentRecipe(recipe);
     return test1
   });
 }
