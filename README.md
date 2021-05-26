@@ -1,22 +1,44 @@
-# What's Cookin'? Starter Kit 
+# What's Cookin'? 
 
-The details of this project are outlined in the <a href="https://frontend.turing.io/projects/whats-cookin.html" target="\__blank">project spec</a>.
+## Index
 
-## Set Up 
+1. [Overview](#overview)
+2. [Server Setup](#server)
+3. [App Setup](#app)
+4. [Technologies](#technologies)
+5. [Contributors](#contributors)
+6. [Future Additions](#additions)
 
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button. 
-2. Both group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` or `npm i` to install project dependencies.
-4. Run `npm start` and visit `localhost:8080`
-5. Make sure both members of your team are collaborators on the forked repo.
+## Overview
+With this app the user should be able to see recipes to choose from, and be able to search a diverse collection of recipes by name, ingredients, or category tags. They should also see their favorited recipes, the selection of recipes they intend to cook. Gibing the feature to have an estimated cost of each ingredient and total of the recipe to cook. 
 
-## Testing 
+### Server Setup
+To set up the data server, run the following commands:
+- git clone git@github.com:turingschool/What-s-cookin--starter-kit-API.git
+- cd What-s-cookin--starter-kit-API
+- npm install
+- npm start
+*Then, open a new Terminal window*
 
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran npm install, then the tooling you need to start testing is already installed (mocha and chai).
+### App Setup
+In the new Terminal window, run the following commands:
+- git clone git@github.com:AshleyOh-bit/Whats-Cookin.git
+- cd whats-cookin
+- npm install
+- npm start
+*Open a window in your web browser of choice, and visit localhost:8080 to view the app!*
 
-## Linting Your Code 
+### Technologies 
+- HTML
+- CSS
+- JavaScript
+- Webpack
+- Eslint
 
-Run the command in your terminal npm run lint to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
+## Contributors
+- [Ashley O'Brien](https://github.com/AshleyOh-bit)
+- [Andrey Bermudez](https://github.com/Andrey-1992) 
 
-Your linter will look only at the JavaScript files you have within the src and the test directories.
-
+### Future Additions
+- **Users Data** - This feature every user could have the possiblitie to have access and add their favorite's recipes into the *Favorite Recipes" and *Recipes to cook* section.
+- **Pantry Data** - This feature is connected with the user pantry and will determine whether a user’s pantry has enough ingredients or the amount of missing ingredients still needed to cook a given meal.
