@@ -10,7 +10,7 @@ import  RecipeRepository  from './classes/RecipeRepository';
 
 let instantiatedRecipes = [];
 
-let recipeRepo, recipeData, ingredientsData, favoriteRecipes
+let recipeRepo, recipeData, ingredientsData
 
 
 // DOM !!!
@@ -57,8 +57,8 @@ function getData() {
   let usersPromise = userPromise()
     .then(data => data)
   Promise.all([ingredientPromise, recipePromise, usersPromise])
-  .then(data => initalizedData(data))
-  .catch(error => console.log(error));
+    .then(data => initalizedData(data))
+    .catch(error => console.log(error));
 }
 
 function initalizedData([ingredients, recipes, users]) {
@@ -175,7 +175,7 @@ function displayCurrentRecipe(currentRecipe) {
             </div>
           </section>
         </div>`
-};
+}
 
 
 function instantiateRecipes(recipeData) {
