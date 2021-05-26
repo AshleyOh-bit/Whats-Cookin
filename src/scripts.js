@@ -11,7 +11,7 @@ import  Ingredient  from './classes/Ingredient';
 import  RecipeRepository  from './classes/RecipeRepository';
 // import  ApiHost  from './apiCalls';
 // import  recipeData  from './data/recipes.js';
-import  ingredientsData  from './data/ingredients.js';
+// import  ingredientsData  from './data/ingredients.js';
 
 let instantiatedRecipes = [];
 // let apiCall =  new ApiHost();
@@ -35,7 +35,7 @@ let instantiatedRecipes = [];
 
 
 
-let recipeRepo, recipeData, ingredients
+let recipeRepo, recipeData, ingredientsData
 
 window.addEventListener("load", getData);
 
@@ -58,11 +58,14 @@ function getData() {
 function initalizedData([ingredients, recipes, users]) {
   // let recipeRepo, recipe, ingredients
   recipeData = recipes.recipeData;
+  ingredientsData = ingredients.ingredientsData
+  // console.log(ingredients);
+
   // console.log(recipes);
   // console.log(recipe);
   // let instantiatedRecipes = [];
   // let recipeRepo = new RecipeRepository(instantiatedRecipes, ingredientsData);
-  recipeRepo = new RecipeRepository(instantiatedRecipes, ingredients)
+  recipeRepo = new RecipeRepository(instantiatedRecipes, ingredientsData)
   instantiateRecipes(recipeData)
   console.log("hl");
   console.log(recipeRepo);
