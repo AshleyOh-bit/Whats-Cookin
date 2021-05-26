@@ -15,10 +15,6 @@ let apiCall =  new ApiHost();
 const apiIng = apiCall.getIngredients();
 const apiRecipes = apiCall.getRecipes();
 const apiUsers = apiCall.getUsers();
-console.log(apiCall)
-console.log(apiIng);
-console.log(apiRecipes);
-console.log(apiUsers);
 
 let recipeRepo = new RecipeRepository(instantiatedRecipes, ingredientsData);
 
@@ -116,7 +112,6 @@ function searchByNameIng() {
   preventDefault();
   show(recipeDisplay);
   const test2 = recipeRepo.filterRecipesByName(filterNameIngInput.value);
-  console.log(test2)
   showRecipes(test2);
 }
 
@@ -129,7 +124,6 @@ function searchByTags() {
   show(recipeDisplay);
 
   let checkBoxMatches = [];
-  console.log(checkBoxMatches)
   checkBoxes.forEach(checkBox => {
     if (checkBox.checked) {
       checkBoxMatches.push(checkBox.value)
@@ -196,7 +190,6 @@ function showCurrentRecipe(event) {
   hide(toCookRecipesView);
   hide(favRecipesView);
   show(currentRecipeView);
-  console.log(event.target.id);
   preventDefault();
 
   let target = event.target.id;
