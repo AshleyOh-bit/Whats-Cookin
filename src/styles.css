@@ -1,20 +1,6 @@
 * {
-  /* border: blue solid 1px; */
   font-family: 'Athiti', sans-serif;
 }
-
-/* font-family: 'Athiti', sans-serif;
-font-family: 'Dancing Script', cursive;
-font-family: 'Pattaya', sans-serif; */
-
-
-/* Colors */
-/* #DDAF94
-#E8CEBF
-#266150
-#4F4846
-#FDF8F5 */
-
 
 html {
   height: 100%;
@@ -98,13 +84,12 @@ nav {
 }
 
 .submit {
-  /* margin: 0; */
   width: 5%;
 }
 
 /*  Multiple Recipe Display */
+
 .recipe-display {
-  /* background-color: #DDAF94; */
   display: flex;
   height: 100%;
   width: 100%;
@@ -149,19 +134,15 @@ nav {
   flex-direction: column;
   align-items: flex-end;
   justify-content: space-evenly;
-  /* margin-right: 5%; */
 }
 
 .current-recipe-img {
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
 }
 
 .food-image {
-  /* height: 25vw;
-  width: 25vw; */
   flex: 2;
 }
 
@@ -193,42 +174,6 @@ nav {
   align-items: center;
 }
 
-
-/* Favorite Recipes */
-/* .saved-view {
-  padding: 30px;
-}
-
-.saved-recipes-section {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.mini-recipes {
-  height: 40vh;
-  margin: 1.3vh auto;
-  position: relative;
-  width: 14vw;
-}
-
-.mini-recipe > .cover-title {
-  bottom: 45px;
-  font-size: 40px;
-}
-
-.mini-recipe > .cover-title::first-letter {
-  font-size: 60px;
-}
-
-.mini-cover > .tagline {
-  background: RGBA(126, 84, 150, .5);
-  bottom: 5px;
-  color: #fcf4dc;
-  font-size: 10px;
-  padding: 5px;
-} */
 
 img {
   width: 300px;
