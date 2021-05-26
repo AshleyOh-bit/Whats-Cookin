@@ -149,12 +149,6 @@ function displayCurrentRecipe(currentRecipe) {
           <section class="current-recipe-name">
             <h2>${currentRecipe.name}</h2>
           </section>
-          <section class="current-recipe-add-to-fav">
-            <button class="add-favorite-button" id="addToFavoriteButton">Favorite</button>
-            <div class="current-recipe-add-to-cook">
-              <button class="add-to-cook-button" id="addtoCookButton">Add to Weekly Meals</button>
-            </div>
-          </section>
           <section class="current-recipe-img">
             <div class="current-recipe-ing">
               <ul>
