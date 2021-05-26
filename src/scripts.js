@@ -3,22 +3,25 @@ import apiCalls from './apiCalls';
 
 
 // Import classes
+import { ingPromise } from './apiCalls';
+import { recPromise } from './apiCalls';
+import { userPromise } from './apiCalls';
 import  Recipe  from "./classes/Recipe";
 import  Ingredient  from './classes/Ingredient';
 import  RecipeRepository  from './classes/RecipeRepository';
-import  ApiHost  from './apiCalls';
-import  recipeData  from './data/recipes.js';
+// import  ApiHost  from './apiCalls';
+// import  recipeData  from './data/recipes.js';
 import  ingredientsData  from './data/ingredients.js';
 
 let instantiatedRecipes = [];
-let apiCall =  new ApiHost();
+// let apiCall =  new ApiHost();
 
-const apiIng = apiCall.getIngredients();
-const apiRecipes = apiCall.getRecipes();
-const apiUsers = apiCall.getUsers();
-console.log(apiIng);
-console.log(apiRecipes);
-console.log(apiUsers);
+// const apiIng = apiCall.getIngredients();
+// const apiRecipes = apiCall.getRecipes();
+// const apiUsers = apiCall.getUsers();
+// console.log(apiIng);
+// console.log(apiRecipes);
+// console.log(apiUsers);
 
 // console.log(apiCall.getIngredients());
 // apiCall.getRecipes();
@@ -27,7 +30,53 @@ console.log(apiUsers);
 
 
 //let recipeRepo = new RecipeRepository(recipeData);
-let recipeRepo = new RecipeRepository(instantiatedRecipes, ingredientsData);
+// let recipeRepo = new RecipeRepository(instantiatedRecipes, ingredientsData);
+
+
+
+
+let recipeRepo, recipeData, ingredients
+
+window.addEventListener("load", getData);
+
+function getData() {
+  let ingredientPromise = ingPromise()
+    .then(data => data)
+  let recipePromise = recPromise()
+    .then(data => data)
+  let usersPromise = userPromise()
+    .then(data => data)
+  Promise.all([ingredientPromise, recipePromise, usersPromise])
+  .then(data => initalizedData(data))
+  .catch(error => console.log(error));
+  // return Promise.all([ingPromise, recPromise])
+  // .catch()
+}
+
+
+
+function initalizedData([ingredients, recipes, users]) {
+  // let recipeRepo, recipe, ingredients
+  recipeData = recipes.recipeData;
+  // console.log(recipes);
+  // console.log(recipe);
+  // let instantiatedRecipes = [];
+  // let recipeRepo = new RecipeRepository(instantiatedRecipes, ingredientsData);
+  recipeRepo = new RecipeRepository(instantiatedRecipes, ingredients)
+  instantiateRecipes(recipeData)
+  console.log("hl");
+  console.log(recipeRepo);
+  showHomeView()
+}
+
+
+
+
+
+
+
+
+
 
 // DOM !!!
 // Buttons
@@ -57,11 +106,11 @@ submitTagsButton.addEventListener('click', searchByTags);
 homeViewBtn.addEventListener('click', showHomeView);
 // recipeDisplay.addEventListener("click", showCurrentRecipe);
 
-window.addEventListener("load", function() {
-  instantiateRecipes(recipeData)});
+// window.addEventListener("load", function() {
+//   instantiateRecipes(recipeData)});
 
-window.addEventListener("load", function() {
-    showHomeView()});
+// window.addEventListener("load", function() {
+//     showHomeView()});
 // favoriteButton.addEventListener('click', showFavoriteRecipes);
 // addToFavoriteButton.addEventListener('click', );
 // toCookButton.addEventListener('click', showRecipesToCook);
@@ -90,7 +139,7 @@ function showHomeView() {
   hide(favRecipesView);
   hide(currentRecipeView);
   show(recipeDisplay);
-  preventDefault();
+  // preventDefault();
 
   let randomRecipe = getRandomRecipe(recipeRepo.recipes);
   console.log(randomRecipe)
@@ -151,6 +200,7 @@ function showAllRecipes() {
   preventDefault();
   show(recipeDisplay);
 
+  console.log(recipeRepo);
   showRecipes(recipeRepo.recipes);
 }
 
@@ -230,6 +280,7 @@ function displayCurrentRecipe(currentRecipe) {
 };
 
 function instantiateRecipes(recipeData) {
+  // console.log(recipeData);
   recipeData.map(recipe => {
     recipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags)
     recipe.createFullIngredients(ingredientsData)
