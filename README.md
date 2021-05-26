@@ -3,17 +3,17 @@
 ## Index
 
 1. [Overview](#overview)
-2. [Setup Instructions](#setup)
+2. [Setup Instructions](#setup instructions)
 3. [Technologies](#technologies)
 4. [Contributors](#contributors)
-5. [Future Additions](#future)
+5. [Future Additions](#future additions)
 
 ## Overview
 With this app the user should be able to see recipes to choose from, and be able to search a diverse collection of recipes by name, ingredients, or category tags. They should also see their favorited recipes, the selection of recipes they intend to cook. Gibing the feature to have an estimated cost of each ingredient and total of the recipe to cook. 
 
 ### Setup Instructions
 
-### Server Setup
+## Server 
 To set up the data server, run the following commands:
 - git clone git@github.com:turingschool/What-s-cookin--starter-kit-API.git
 - cd What-s-cookin--starter-kit-API
@@ -21,7 +21,7 @@ To set up the data server, run the following commands:
 - npm start
 *Then, open a new Terminal window*
 
-### App Setup
+## App 
 In the new Terminal window, run the following commands:
 - git clone git@github.com:AshleyOh-bit/Whats-Cookin.git
 - cd whats-cookin
