@@ -3,10 +3,10 @@
 ## Index
 
 1. [Overview](#overview)
-2. [Setup Instructions](#setup instructions)
+2. [Setup Instructions](#setupinstructions)
 3. [Technologies](#technologies)
 4. [Contributors](#contributors)
-5. [Future Additions](#future additions)
+5. [Future Additions](#futureadditions)
 
 ## Overview
 With this app the user should be able to see recipes to choose from, and be able to search a diverse collection of recipes by name, ingredients, or category tags. They should also see their favorited recipes, the selection of recipes they intend to cook. Gibing the feature to have an estimated cost of each ingredient and total of the recipe to cook. 
