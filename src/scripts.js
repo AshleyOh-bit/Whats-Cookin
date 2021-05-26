@@ -6,19 +6,17 @@ import { ingPromise } from './apiCalls';
 import { recPromise } from './apiCalls';
 import { userPromise } from './apiCalls';
 import  Recipe  from "./classes/Recipe";
-import  Ingredient  from './classes/Ingredient';
 import  RecipeRepository  from './classes/RecipeRepository';
 
 let instantiatedRecipes = [];
-let recipeRepo, recipeData, ingredientsData, favoriteRecipes
+
+let recipeRepo, recipeData, ingredientsData
+
 
 // DOM !!!
 // Buttons
 const allRecipesButton = document.getElementById("allRecipesButton");
-const favoriteButton = document.getElementById("favoriteButton");
-const toCookButton = document.getElementById("toCookButton");
-const addToFavoriteButton = document.getElementById("addToFavoriteButton");
-const addtoCookButton = document.getElementById("addtoCookButton");
+
 // Submit Buttons
 const homeViewBtn = document.getElementById("homeViewBtn");
 const filterNameIngInput = document.getElementById("filterNameIngInput");
@@ -26,12 +24,10 @@ const submitNameIng = document.getElementById("submitNameIng");
 const submitTagsButton = document.getElementById("submitTagsButton");
 const checkBoxes = document.querySelectorAll("input[type=checkbox]");
 // Views
-const tagsView = document.getElementById("tagsView");
 const recipeDisplay = document.getElementById("recipeDisplay");
 const favRecipesView = document.getElementById("favRecipesView");
 const toCookRecipesView = document.getElementById("toCookRecipesView");
 const currentRecipeView = document.getElementById("currentRecipeView");
-const currentRecipeCard = document.getElementById("currentRecipeCard");
 
 // Event Listeners
 window.addEventListener("load", getData);
@@ -61,8 +57,8 @@ function getData() {
   let usersPromise = userPromise()
     .then(data => data)
   Promise.all([ingredientPromise, recipePromise, usersPromise])
-  .then(data => initalizedData(data))
-  .catch(error => console.log(error));
+    .then(data => initalizedData(data))
+    .catch(error => console.log(error));
 }
 
 function initalizedData([ingredients, recipes, users]) {
@@ -90,16 +86,20 @@ function showHomeView() {
 // Show Recipes Function
 function showRecipes(recipes) {
   recipeDisplay.innerHTML = "";
-  let recipeCard = recipes.forEach(recipe => {
-    let recipeCard = document.createElement("div");
-    recipeCard.addEventListener("click", showCurrentRecipe)
-    recipeCard.innerHTML =
-    `
-    <h3 id=${recipe.id}>${recipe.name}</h3>
-    <img id=${recipe.id} src=${recipe.image}>
-    `
-    recipeDisplay.appendChild(recipeCard)
-  });
+  if (recipes === "Sorry, we could not find any recipes to match your search") {
+    return recipeDisplay.innerHTML = `<h3>Sorry, we could not find any recipes to match your search</h3>`;
+  } else {
+    recipes.forEach(recipe => {
+      let recipeCard = document.createElement("div");
+      recipeCard.addEventListener("click", showCurrentRecipe)
+      recipeCard.innerHTML =
+      `
+      <h3 id=${recipe.id}>${recipe.name}</h3>
+      <img id=${recipe.id} src=${recipe.image}>
+      `
+      recipeDisplay.appendChild(recipeCard)
+    })
+  }
 }
 
 function showAllRecipes() {
@@ -131,7 +131,7 @@ function searchByTags() {
 
   let checkBoxMatches = [];
   checkBoxes.forEach(checkBox => {
-    if(checkBox.checked) {
+    if (checkBox.checked) {
       checkBoxMatches.push(checkBox.value)
     }
   })
@@ -142,18 +142,12 @@ function searchByTags() {
 }
 
 function displayCurrentRecipe(currentRecipe) {
-    currentRecipeView.innerHTML = "";
+  currentRecipeView.innerHTML = "";
 
-      currentRecipeView.innerHTML =
+  currentRecipeView.innerHTML =
           `<div class="current-recipe-card" id="currentRecipeCard">
           <section class="current-recipe-name">
             <h2>${currentRecipe.name}</h2>
-          </section>
-          <section class="current-recipe-add-to-fav">
-            <button class="add-favorite-button" id="addToFavoriteButton">Favorite</button>
-            <div class="current-recipe-add-to-cook">
-              <button class="add-to-cook-button" id="addtoCookButton">Add to Weekly Meals</button>
-            </div>
           </section>
           <section class="current-recipe-img">
             <div class="current-recipe-ing">
@@ -181,7 +175,8 @@ function displayCurrentRecipe(currentRecipe) {
             </div>
           </section>
         </div>`
-};
+}
+
 
 function instantiateRecipes(recipeData) {
   recipeData.map(recipe => {
@@ -199,11 +194,11 @@ function showCurrentRecipe(event) {
   preventDefault();
 
   let target = event.target.id;
-  recipeRepo.recipes.find(recipes => {
-    let numId = recipes.id;
+  recipeRepo.recipes.find(recipe => {
+    let numId = recipe.id;
     let stringNum =  numId.toString();
     let test1 = (stringNum === target);
-    displayCurrentRecipe(recipes);
+    displayCurrentRecipe(recipe);
     return test1
   });
 }

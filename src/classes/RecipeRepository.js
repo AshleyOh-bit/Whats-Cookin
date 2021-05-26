@@ -1,5 +1,4 @@
-// import ingredientsData from "../data/ingredients";
-// import Recipe from "./Recipe";
+import Recipe from "./Recipe";
 
 class RecipeRepository {
   constructor(recipes, ingredientsData) {
@@ -21,9 +20,9 @@ class RecipeRepository {
 
   filterRecipesByName(input) {
     const recipeMatch = this.recipes.filter(recipe => {
-        return recipe.name  === input;
+        return recipe.name.includes(input);
     });
-    if (!recipeMatch[0]) {
+    if (!recipeMatch.length) {
       return this.filterRecipesByIngredients(input)
     } else {
       return recipeMatch
@@ -33,7 +32,11 @@ class RecipeRepository {
   filterRecipesByIngredients(input) {
     let matches = [];
     let match = this.ingredients.find(ingredient => {
-      return ingredient.name.includes(input)
+      if (!ingredient.name) {
+        return
+      } else {
+        return ingredient.name.includes(input)
+      }
     })
     if (!match) {
       return "Sorry, we could not find any recipes to match your search"
@@ -47,7 +50,7 @@ class RecipeRepository {
       })
       return matches
     }
-    }
+  }
 }
 
 export default RecipeRepository;

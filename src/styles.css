@@ -1,15 +1,3 @@
-/* Font Style */
-/* font-family: 'Athiti', sans-serif;
-font-family: 'Dancing Script', cursive;
-font-family: 'Pattaya', sans-serif; */
-
-/* Color Palete */
-/* #DDAF94
-#E8CEBF
-#266150
-#4F4846
-#FDF8F5 */
-
 * {
   font-family: 'Athiti', sans-serif;
 }
@@ -100,6 +88,7 @@ nav {
 }
 
 /*  Multiple Recipe Display */
+
 .recipe-display {
   display: flex;
   height: 100%;

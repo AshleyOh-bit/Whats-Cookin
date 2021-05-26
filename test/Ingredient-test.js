@@ -5,7 +5,6 @@ describe("Ingredient", () => {
   let ingredient;
 
   beforeEach(() => {
-    //added new properties to the ingredient class
     ingredient = new Ingredient(582, "clementine", 203, {"quantity": {
       "amount": .25,
       "unit": "lb"
@@ -36,13 +35,4 @@ describe("Ingredient", () => {
 
     expect(ingredient.cost).to.equal(203);
   });
-
-  // it('should store the quantity of the ingredient', () => {
-  //
-  //   expect(ingredient.quantity).to.be.an("object");
-  //   expect(ingredient.quantity).to.deep.equal({"quantity": {
-  //     "amount": .25,
-  //     "unit": "lb"
-  //   }});
-  // });
 });

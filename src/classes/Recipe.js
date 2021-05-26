@@ -1,5 +1,3 @@
-// import ingredientsData from "../data/ingredients";
-
 class Recipe {
   constructor(id, img, ingredients, instructions, name, tags) {
     this.id = id;
@@ -58,9 +56,7 @@ class Recipe {
       let step = instruction.instruction
       newInstructions.push(num, step)
     })
-
     return newInstructions;
-
   }
 }
 
