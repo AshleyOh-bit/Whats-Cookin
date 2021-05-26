@@ -1,4 +1,4 @@
-import ingredientsData from "../data/ingredients";
+// import ingredientsData from "../data/ingredients";
 
 class Recipe {
   constructor(id, img, ingredients, instructions, name, tags) {

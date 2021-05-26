@@ -1,5 +1,5 @@
-import ingredientsData from "../data/ingredients";
-import Recipe from "./Recipe";
+// import ingredientsData from "../data/ingredients";
+// import Recipe from "./Recipe";
 
 class RecipeRepository {
   constructor(recipes, ingredientsData) {
@@ -32,7 +32,6 @@ class RecipeRepository {
 
   filterRecipesByIngredients(input) {
     let matches = [];
-    console.log(this.ingredients);
     let match = this.ingredients.find(ingredient => {
       return ingredient.name.includes(input)
     })
