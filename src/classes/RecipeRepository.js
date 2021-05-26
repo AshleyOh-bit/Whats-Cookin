@@ -1,5 +1,5 @@
-import ingredientsData from "../data/ingredients";
-import Recipe from "./Recipe";
+// import ingredientsData from "../data/ingredients";
+// import Recipe from "./Recipe";
 
 class RecipeRepository {
   constructor(recipes, ingredientsData) {

@@ -1,33 +1,16 @@
 import './styles.css';
 import apiCalls from './apiCalls';
 
-
 // Import classes
+import { ingPromise } from './apiCalls';
+import { recPromise } from './apiCalls';
+import { userPromise } from './apiCalls';
 import  Recipe  from "./classes/Recipe";
 import  Ingredient  from './classes/Ingredient';
 import  RecipeRepository  from './classes/RecipeRepository';
-import  ApiHost  from './apiCalls';
-import  recipeData  from './data/recipes.js';
-import  ingredientsData  from './data/ingredients.js';
 
 let instantiatedRecipes = [];
-let apiCall =  new ApiHost();
-
-const apiIng = apiCall.getIngredients();
-const apiRecipes = apiCall.getRecipes();
-const apiUsers = apiCall.getUsers();
-console.log(apiIng);
-console.log(apiRecipes);
-console.log(apiUsers);
-
-// console.log(apiCall.getIngredients());
-// apiCall.getRecipes();
-//We will be instantiating Recipes here from data
-//event listener on window load for this function?
-
-
-//let recipeRepo = new RecipeRepository(recipeData);
-let recipeRepo = new RecipeRepository(instantiatedRecipes, ingredientsData);
+let recipeRepo, recipeData, ingredientsData, favoriteRecipes
 
 // DOM !!!
 // Buttons
@@ -51,22 +34,11 @@ const currentRecipeView = document.getElementById("currentRecipeView");
 const currentRecipeCard = document.getElementById("currentRecipeCard");
 
 // Event Listeners
+window.addEventListener("load", getData);
 allRecipesButton.addEventListener('click', showAllRecipes);
 submitNameIng.addEventListener('click', searchByNameIng);
 submitTagsButton.addEventListener('click', searchByTags);
 homeViewBtn.addEventListener('click', showHomeView);
-// recipeDisplay.addEventListener("click", showCurrentRecipe);
-
-window.addEventListener("load", function() {
-  instantiateRecipes(recipeData)});
-
-window.addEventListener("load", function() {
-    showHomeView()});
-// favoriteButton.addEventListener('click', showFavoriteRecipes);
-// addToFavoriteButton.addEventListener('click', );
-// toCookButton.addEventListener('click', showRecipesToCook);
-// addtoCookButton.addEventListener('click', );
-
 
 // Functions
 function preventDefault() {
@@ -81,6 +53,26 @@ function hide(element) {
   element.classList.add('hidden');
 }
 
+function getData() {
+  let ingredientPromise = ingPromise()
+    .then(data => data)
+  let recipePromise = recPromise()
+    .then(data => data)
+  let usersPromise = userPromise()
+    .then(data => data)
+  Promise.all([ingredientPromise, recipePromise, usersPromise])
+  .then(data => initalizedData(data))
+  .catch(error => console.log(error));
+}
+
+function initalizedData([ingredients, recipes, users]) {
+  recipeData = recipes.recipeData;
+  ingredientsData = ingredients.ingredientsData
+  recipeRepo = new RecipeRepository(instantiatedRecipes, ingredientsData)
+  instantiateRecipes(recipeData)
+  showHomeView()
+}
+
 function getRandomRecipe(recipe) {
   return recipe[Math.floor(Math.random() * recipe.length)];
 }
@@ -90,16 +82,12 @@ function showHomeView() {
   hide(favRecipesView);
   hide(currentRecipeView);
   show(recipeDisplay);
-  preventDefault();
 
   let randomRecipe = getRandomRecipe(recipeRepo.recipes);
-  console.log(randomRecipe)
   showRecipes([randomRecipe]);
 }
 
 // Show Recipes Function
-// Change for iteration methods and be able to use for fav and to cook
-//
 function showRecipes(recipes) {
   recipeDisplay.innerHTML = "";
   let recipeCard = recipes.forEach(recipe => {
@@ -112,36 +100,6 @@ function showRecipes(recipes) {
     `
     recipeDisplay.appendChild(recipeCard)
   });
-
-
-  // recipeDisplay.innerHTML = "";
-  // for (var i = 0; i < recipes.length; i++) {
-  //   //recipes[i];
-  //   // console.log(recipes[i]);
-  //   let recipeCard = document.createElement("div");
-  //   recipeCard.addEventListener("click", showCurrentRecipe)
-  //   recipeCard.innerHTML =
-  //   `
-  //   <h3 id=${recipes[i].id}>${recipes[i].name}</h3>
-  //   <img id=${recipes[i].id} src=${recipes[i].image}>
-  //   `
-  //   recipeDisplay.appendChild(recipeCard)
-  // }
-
-
-  // recipeCardSection.innerHTML = "";
-  // let recipeCard = recipes.forEach(recipe => {
-  //   recipeCardSection.innerHTML +=
-  //   `
-  //   <div class="recipe-display" id="recipeDisplay">
-  //   <p id=${recipe.id}>${recipe.name}</p>
-  //   <img id=${recipe.id} src=${recipe.image}>
-  //   </div>
-  //   `
-  // })
-  // <div class="recipe-card-section" id="recipeCardSection">
-    // recipeDisplay.appendChild(recipeCardSection)
-
 }
 
 function showAllRecipes() {
@@ -164,7 +122,6 @@ function searchByNameIng() {
   showRecipes(test2);
 }
 
-
 function searchByTags() {
   hide(toCookRecipesView);
   hide(favRecipesView);
@@ -173,7 +130,6 @@ function searchByTags() {
   show(recipeDisplay);
 
   let checkBoxMatches = [];
-  console.log(checkBoxMatches)
   checkBoxes.forEach(checkBox => {
     if(checkBox.checked) {
       checkBoxMatches.push(checkBox.value)
@@ -225,15 +181,12 @@ function displayCurrentRecipe(currentRecipe) {
             </div>
           </section>
         </div>`
-    // currentRecipeView.innerHTML = currentRecipeHTML;
-    //currentRecipeView.appendChild(currentRecipeView)
 };
 
 function instantiateRecipes(recipeData) {
   recipeData.map(recipe => {
     recipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags)
     recipe.createFullIngredients(ingredientsData)
-    //console.log(recipe)
     return instantiatedRecipes.push(recipe)
   })
 }
@@ -243,37 +196,14 @@ function showCurrentRecipe(event) {
   hide(toCookRecipesView);
   hide(favRecipesView);
   show(currentRecipeView);
-  console.log(event.target.id);
   preventDefault();
 
   let target = event.target.id;
   recipeRepo.recipes.find(recipes => {
-    // console.log(recipes.id);
-    // console.log(target)
     let numId = recipes.id;
     let stringNum =  numId.toString();
-    // let parseNum = num.toString(recipes.id);
     let test1 = (stringNum === target);
-    // console.log(test1);
     displayCurrentRecipe(recipes);
     return test1
   });
 }
-
-// function showFavoriteRecipes() {
-//   show(favRecipesView);
-//   hide(toCookRecipesView);
-// }
-//
-// function showRecipesToCook() {
-//   show(toCookRecipesView);
-//   hide(favRecipesView);
-// }
-
-
-
-
-// window.onload = showRecipes(recipeRepo.recipes);
-//recipe.createFullIngredients()
-
-//console.log('Hello world');
