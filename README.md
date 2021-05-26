@@ -8,9 +8,12 @@
 4. [Technologies](#technologies)
 5. [Contributors](#contributors)
 6. [Future Additions](#futureadditions)
+7. [App Demo](#appdemo)
 
 ## Overview
-With this app the user should be able to see recipes to choose from, and be able to search a diverse collection of recipes by name, ingredients, or category tags. They should also see their favorited recipes, the selection of recipes they intend to cook. Gibing the feature to have an estimated cost of each ingredient and total of the recipe to cook. 
+With this app the user should be able to see recipes to choose from, and be able to search a diverse collection of recipes by name, ingredients, or category tags. Also users should also see their favorited recipes, the selection of recipes they intend to cook. Gibing the feature to have an estimated cost of each ingredient and total of the recipe to cook. 
+
+See more information <a href="https://frontend.turing.io/projects/whats-cookin.html" target="\__blank">here</a>.
 
 ### Setup Instructions
 
@@ -36,6 +39,7 @@ In the new Terminal window, run the following commands:
 - JavaScript
 - Webpack
 - Eslint
+- GitHub Projects
 
 ## Contributors
 - [Ashley O'Brien](https://github.com/AshleyOh-bit)
@@ -44,3 +48,6 @@ In the new Terminal window, run the following commands:
 ## Future Additions
 - **Users Data** - This feature every user could have the possiblitie to have access and add their favorite's recipes into the *Favorite Recipes" and *Recipes to cook* section.
 - **Pantry Data** - This feature is connected with the user pantry and will determine whether a user’s pantry has enough ingredients or the amount of missing ingredients still needed to cook a given meal.
+
+## App Demo
+
