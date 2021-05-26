@@ -118,7 +118,7 @@ describe("User", () => {
     user.addToFavoriteRecipes(recipe1);
     user.filterFavRecipesByName("Crab legs", testIngredientsData);
 
-    expect(user.filterFavRecipesByName("Crab legs", testIngredientsData)).to.equal("Sorry, we could not find any recipes to match your search");
+    expect(user.filterFavRecipesByIngredients("Crab legs", testIngredientsData)).to.equal("Sorry, we could not find any recipes to match your search");
   });
 
   //Happy
@@ -126,13 +126,12 @@ describe("User", () => {
     user.addToFavoriteRecipes(recipe);
     user.addToFavoriteRecipes(recipe1);
     user.filterFavRecipesByName("pasta", testIngredientsData);
-    console.log(testIngredientsData)
 
     expect(user.filterFavRecipesByIngredients("pasta", testIngredientsData)).to.deep.equal([recipe]);
   });
 
   //Sad
-  it.skip('should alert the user if no recipe with specified ingredients are found', () => {
+  it('should alert the user if no recipe with specified ingredients are found', () => {
     user.addToFavoriteRecipes(recipe);
     user.addToFavoriteRecipes(recipe1);
     user.filterFavRecipesByName("milk", testIngredientsData);
