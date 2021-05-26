@@ -50,4 +50,4 @@ In the new Terminal window, run the following commands:
 - **Pantry Data** - This feature is connected with the user pantry and will determine whether a user’s pantry has enough ingredients or the amount of missing ingredients still needed to cook a given meal.
 
 ## App Demo
-[App Demo](https://media.giphy.com/media/WViB1RsgJDt88r7ULs/giphy.gif)
+![App Demo](https://media.giphy.com/media/WViB1RsgJDt88r7ULs/giphy.gif)
