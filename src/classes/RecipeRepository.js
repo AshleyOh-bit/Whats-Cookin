@@ -1,4 +1,3 @@
-import ingredientsData from "../data/ingredients";
 import Recipe from "./Recipe";
 
 class RecipeRepository {
@@ -23,7 +22,7 @@ class RecipeRepository {
     const recipeMatch = this.recipes.filter(recipe => {
         return recipe.name.includes(input);
     });
-    if (!recipeMatch[0]) {
+    if (!recipeMatch.length) {
       return this.filterRecipesByIngredients(input)
     } else {
       return recipeMatch
@@ -51,7 +50,7 @@ class RecipeRepository {
       })
       return matches
     }
-    }
+  }
 }
 
 export default RecipeRepository;

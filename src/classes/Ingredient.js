@@ -3,7 +3,6 @@ class Ingredient {
     this.id = id;
     this.name = name || "";
     this.cost = cost || 0;
-    //this.quantity = quantityObj;
   }
 }
 

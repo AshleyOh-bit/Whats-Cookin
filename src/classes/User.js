@@ -1,7 +1,4 @@
-
 import  Recipe  from "./Recipe";
-import ingredientsData from "../data/ingredients";
-
 
 class User {
   constructor(id, name, pantry) {
@@ -79,7 +76,6 @@ class User {
       return matches
     }
   }
-
 }
 
 

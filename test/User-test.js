@@ -46,7 +46,6 @@ describe("User", () => {
     expect(user.pantry).to.deep.equal([{"ingredient": 1124, "amount": 3}, {"ingredient": 1127, "amount": 2}, {"ingredient": 14, "amount": 7}]);
   });
 
-  //Happy
   it('should be able to store favorites recipes', () => {
     user.addToFavoriteRecipes(recipe);
     user.addToFavoriteRecipes(recipe1);
@@ -54,7 +53,6 @@ describe("User", () => {
     expect(user.favoriteRecipes).to.deep.equal([recipe, recipe1]);
   });
 
-  //Sad
   it('should prevent the user from favoriting the same recipe twice', () => {
     user.favoriteRecipes = [recipe];
     user.addToFavoriteRecipes(recipe);
@@ -69,7 +67,6 @@ describe("User", () => {
     expect(user.favoriteRecipes).to.deep.equal([]);
   });
 
-  //Happy
   it('should be able to add a recipe to weekly recipes', () => {
     user.addToRecipesToCook(recipe);
     user.addToRecipesToCook(recipe1);
@@ -77,7 +74,6 @@ describe("User", () => {
     expect(user.recipesToCook).to.deep.equal([recipe, recipe1]);
   });
 
-  //Sad
   it('should prevent the user from saving the same recipe twice', () => {
     user.favoriteRecipes = [recipe];
     user.addToRecipesToCook(recipe);
@@ -85,7 +81,6 @@ describe("User", () => {
     expect(user.recipesToCook).to.deep.equal([recipe]);
   });
 
-  //Happy
   it('should filter favorite recipes via tags', () => {
     user.addToFavoriteRecipes(recipe);
     user.addToFavoriteRecipes(recipe1);
@@ -94,7 +89,6 @@ describe("User", () => {
     expect(user.filterFavRecipesTags(["dinner"])).to.deep.equal([recipe]);
   });
 
-  //Sad
   it('should alert user when no recipe with that tag is found', () => {
     user.addToFavoriteRecipes(recipe);
     user.addToFavoriteRecipes(recipe1);
@@ -103,7 +97,6 @@ describe("User", () => {
     expect(user.filterFavRecipesTags(["tea"])).to.equal("Sorry, we could not find any recipes with that tag");
   });
 
-  //Happy
   it('should filter favorite recipes via name or ingredients', () => {
     user.addToFavoriteRecipes(recipe);
     user.addToFavoriteRecipes(recipe1);
@@ -112,7 +105,6 @@ describe("User", () => {
     expect(user.filterFavRecipesByName("Macaroni and Cheese", testIngredientsData)).to.deep.equal([recipe]);
   });
 
-  //Sad
   it('should alert the user when no recipe with that name is found', () => {
     user.addToFavoriteRecipes(recipe);
     user.addToFavoriteRecipes(recipe1);
@@ -121,7 +113,6 @@ describe("User", () => {
     expect(user.filterFavRecipesByIngredients("Crab legs", testIngredientsData)).to.equal("Sorry, we could not find any recipes to match your search");
   });
 
-  //Happy
   it('should filter favorite recipes via name or ingredients', () => {
     user.addToFavoriteRecipes(recipe);
     user.addToFavoriteRecipes(recipe1);
@@ -130,7 +121,6 @@ describe("User", () => {
     expect(user.filterFavRecipesByIngredients("pasta", testIngredientsData)).to.deep.equal([recipe]);
   });
 
-  //Sad
   it('should alert the user if no recipe with specified ingredients are found', () => {
     user.addToFavoriteRecipes(recipe);
     user.addToFavoriteRecipes(recipe1);

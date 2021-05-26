@@ -1,22 +1,17 @@
 import './styles.css';
 import apiCalls from './apiCalls';
 
-
 // Import classes
+import { ingPromise } from './apiCalls';
+import { recPromise } from './apiCalls';
+import { userPromise } from './apiCalls';
 import  Recipe  from "./classes/Recipe";
 import  RecipeRepository  from './classes/RecipeRepository';
-import  ApiHost  from './apiCalls';
-import  recipeData  from './data/recipes.js';
-import  ingredientsData  from './data/ingredients.js';
 
 let instantiatedRecipes = [];
-let apiCall =  new ApiHost();
 
-const apiIng = apiCall.getIngredients();
-const apiRecipes = apiCall.getRecipes();
-const apiUsers = apiCall.getUsers();
+let recipeRepo, recipeData, ingredientsData, favoriteRecipes
 
-let recipeRepo = new RecipeRepository(instantiatedRecipes, ingredientsData);
 
 // DOM !!!
 // Buttons
@@ -35,18 +30,11 @@ const toCookRecipesView = document.getElementById("toCookRecipesView");
 const currentRecipeView = document.getElementById("currentRecipeView");
 
 // Event Listeners
+window.addEventListener("load", getData);
 allRecipesButton.addEventListener('click', showAllRecipes);
 submitNameIng.addEventListener('click', searchByNameIng);
 submitTagsButton.addEventListener('click', searchByTags);
 homeViewBtn.addEventListener('click', showHomeView);
-
-window.addEventListener("load", function() {
-  instantiateRecipes(recipeData)
-});
-
-window.addEventListener("load", function() {
-  showHomeView()
-});
 
 // Functions
 function preventDefault() {
@@ -61,6 +49,26 @@ function hide(element) {
   element.classList.add('hidden');
 }
 
+function getData() {
+  let ingredientPromise = ingPromise()
+    .then(data => data)
+  let recipePromise = recPromise()
+    .then(data => data)
+  let usersPromise = userPromise()
+    .then(data => data)
+  Promise.all([ingredientPromise, recipePromise, usersPromise])
+  .then(data => initalizedData(data))
+  .catch(error => console.log(error));
+}
+
+function initalizedData([ingredients, recipes, users]) {
+  recipeData = recipes.recipeData;
+  ingredientsData = ingredients.ingredientsData
+  recipeRepo = new RecipeRepository(instantiatedRecipes, ingredientsData)
+  instantiateRecipes(recipeData)
+  showHomeView()
+}
+
 function getRandomRecipe(recipe) {
   return recipe[Math.floor(Math.random() * recipe.length)];
 }
@@ -70,7 +78,6 @@ function showHomeView() {
   hide(favRecipesView);
   hide(currentRecipeView);
   show(recipeDisplay);
-  preventDefault();
 
   let randomRecipe = getRandomRecipe(recipeRepo.recipes);
   showRecipes([randomRecipe]);
@@ -114,7 +121,6 @@ function searchByNameIng() {
   const test2 = recipeRepo.filterRecipesByName(filterNameIngInput.value);
   showRecipes(test2);
 }
-
 
 function searchByTags() {
   hide(toCookRecipesView);
@@ -175,7 +181,8 @@ function displayCurrentRecipe(currentRecipe) {
             </div>
           </section>
         </div>`
-}
+};
+
 
 function instantiateRecipes(recipeData) {
   recipeData.map(recipe => {
