@@ -30,7 +30,7 @@ In the new Terminal window, run the following commands:
 - npm start
 *Open a window in your web browser of choice, and visit localhost:8080 to view the app!*
 
-### Technologies 
+## Technologies 
 - HTML
 - CSS
 - JavaScript
@@ -41,6 +41,6 @@ In the new Terminal window, run the following commands:
 - [Ashley O'Brien](https://github.com/AshleyOh-bit)
 - [Andrey Bermudez](https://github.com/Andrey-1992) 
 
-### Future Additions
+## Future Additions
 - **Users Data** - This feature every user could have the possiblitie to have access and add their favorite's recipes into the *Favorite Recipes" and *Recipes to cook* section.
 - **Pantry Data** - This feature is connected with the user pantry and will determine whether a user’s pantry has enough ingredients or the amount of missing ingredients still needed to cook a given meal.
